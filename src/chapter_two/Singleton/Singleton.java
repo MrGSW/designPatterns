@@ -39,6 +39,7 @@ public class Singleton {
 	}
 }
 */
+/*
 
 public class Singleton {
 
@@ -57,4 +58,37 @@ public class Singleton {
 		}
 		return instance;
 	}
+}*/
+
+/*
+public class Singleton {
+
+	//限制产生多个对象
+	private static volatile Singleton instance = null;
+
+	private Singleton() {}
+
+	public static Singleton newInstance() {
+		if (null == instance) {
+			synchronized(Singleton.class) {
+				if (instance == null) {
+					instance = new Singleton();
+				}
+			}
+		}
+		return instance;
+	}
+}*/
+
+public class Singleton {
+
+	private static class Nested {
+		public static final Singleton instance = new Singleton();
+		Nested() {}
+	}
+
+	public static Singleton newInstance() {
+		return Nested.instance;
+	}
+
 }
